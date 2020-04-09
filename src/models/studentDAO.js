@@ -5,7 +5,7 @@ const TABLE_NAME = "studentPal";
 
 
 class Student {
-    constructor(firstName, lastName, studentNumber, personlEmail) {
+    constructor(firstName, lastName, studentNumber, personlEmail, dateOfBirth, immigrationStatus, address) {
         const fullName = firstName+" "+lastName;
         const lliEmail = studentNumber+"@llinstitute.com"
         this.firstName = firstName;
@@ -13,8 +13,15 @@ class Student {
         this.studentNumber = studentNumber;
         this.fullName=fullName;
         this.personlEmail = personlEmail;
-        this.lliEmail= lliEmail
+        this.lliEmail= lliEmail;
+        this.dateOfBirth = dateOfBirth;
+        this.immigrationStatus = immigrationStatus;
+        this.address = address;
         this.isDeleted = false;
+    }
+    search(keyword){
+      return this.studentNumber.toLowerCase().includes( keyword.toLowerCase() ) ||
+      this.firstName.toLowerCase().includes( keyword.toLowerCase() )
     }
 }
 
@@ -52,11 +59,22 @@ export default class StudentDAO {
     getAllList() {
         const studentsJSON = localStorage.getItem(TABLE_NAME);
         const studentsArr = JSON.parse(studentsJSON);
-        return studentsArr;
+        let students = [];
+        let studentObj;
+        for (studentObj of studentsArr){
+          //firstName, lastName, studentNumber, personlEmail
+          let student = new Student(
+            studentObj.firstName, studentObj.lastName, studentObj.studentNumber,studentObj.personlEmail,
+            studentObj.dateOfBirth, studentObj.immigrationStatus, studentObj.address
+          )
+          students.push(student)
+        }
+        return students;
     }
 
-    addObject(firstName, lastName, studentNumber, personlEmail) {
-        const student = new Student(firstName, lastName, studentNumber, personlEmail);
+
+    addObject(firstName, lastName, studentNumber, personlEmail, dateOfBirth, immigrationStatus, address) {
+        const student = new Student(firstName, lastName, studentNumber, personlEmail, dateOfBirth, immigrationStatus, address);
 
         const studentsArr = this.getAllList();
         studentsArr.push(student);
@@ -74,7 +92,7 @@ export default class StudentDAO {
         return null;
     }
 
-    updateObjectByStudentNumber(firstName, lastName, studentNumber, personlEmail) {
+    updateObjectByStudentNumber(firstName, lastName, studentNumber, personlEmail, dateOfBirth, immigrationStatus, address) {
         const studentArr = this.getAllList();
 
         let studentIterator;
@@ -83,7 +101,9 @@ export default class StudentDAO {
                 studentIterator.firstName = firstName;
                 studentIterator.lastName = lastName;
                 studentIterator.personlEmail = personlEmail;
-                studentIterator.studentNumber = studentNumber;
+                studentIterator.dateOfBirth = dateOfBirth;
+                studentIterator.immigrationStatus = immigrationStatus;
+                studentIterator.address = address;
                 this.saveToLocalStorage(studentArr);
                 break;
             }

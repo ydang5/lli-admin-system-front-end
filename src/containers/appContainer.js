@@ -10,6 +10,10 @@ import DashboardContainer from "./dashboardContainer"
 import StudentListContainer from "./studentListContainer"
 import StudentCreateContainer from "./studentCreateContainer"
 import StudentDetailContainer from "./studentDetailContainer";
+import StudentArchiveContainer from "./studentArchiveContainer";
+import StudentDeleteContainer from "./studentDeleteContainer";
+import StudentUpdateContainer from "./studentUpdateContainer";
+
 
 import { BrowserRouter as Router, Route, withRouter, Switch} from "react-router-dom";
 
@@ -28,11 +32,13 @@ class AppContainer extends Component {
                 <Route path="/register" exact component={RegisterConatiner} />
                 <Route path="/login" exact component={LoginContainer} />
                 <Route path="/dashboard" exact component={DashboardContainer} />
-                <Route path="/student-list" exact components={StudentListContainer} />
-                <Route path="/student-create" exact components={StudentCreateContainer} />
+                <Route path="/student-list" exact component={StudentListContainer} />
+                <Route path="/student-create" exact component={StudentCreateContainer} />
                 <Route path="/student/:studentNumber" exact component={StudentDetailContainer} />
+                <Route path="/student-archive/:studentNumber" exact component={StudentArchiveContainer} />
+                <Route path="/student-delete/:studentNumber" exact component={StudentDeleteContainer} />
+                <Route path="/student-update/:studentNumber" exact component={StudentUpdateContainer} />
                 <Route component={NotFound404Container} />
-
            </Switch>
          </div>
        </Router>

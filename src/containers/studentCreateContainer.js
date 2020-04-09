@@ -13,13 +13,20 @@ export default class StudentCreateContainer extends Component {
             lastName: "",
             studentNumber: "",
             personlEmail:"",
-            error:"",
+            dateOfBirth:"",
+            immigrationStatus:"",
+            address:"",
+            studentNumberError:"",
+            isValidated:false
         }
 
         this.onFirstNameChange = this.onFirstNameChange.bind(this);
         this.onLastNameChange = this.onLastNameChange.bind(this);
         this.onStudentNumberChange = this.onStudentNumberChange.bind(this);
         this.onPersonlEmailChange = this.onPersonlEmailChange.bind(this);
+        this.onDateOfBirthChange = this.onDateOfBirthChange.bind(this);
+        this.onImmigrationStatusChange = this.onImmigrationStatusChange.bind(this);
+        this.onAddressChange = this.onAddressChange.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
@@ -47,45 +54,78 @@ export default class StudentCreateContainer extends Component {
         })
     }
 
+    onDateOfBirthChange(event) {
+        this.setState({
+            personlEmail: event.target.value,
+        })
+    }
+
+    onImmigrationStatusChange(event) {
+        this.setState({
+            personlEmail: event.target.value,
+        })
+    }
+
+    onAddressChange(event) {
+        this.setState({
+            personlEmail: event.target.value,
+        })
+    }
+
     onClick(event) {
         event.preventDefault();
 
-        const { firstName, lastName, studentNumber, personlEmail } = this.state;
-        this.setState({
-          error: "",
-        });
+        const { firstName, lastName, studentNumber, personlEmail, dateOfBirth, immigrationStatus, address } = this.state;
+        let studentNumberError = "";
+        let isValidated = false;
+
 
         const studentDAO = new StudentDAO();
         const studentArr = studentDAO.getList()
+
         let studentObj;
         for (studentObj of studentArr){
           if (studentObj.studentNumber === studentNumber){
-            this.setState({
-                error: DUPLICATE_STUDENT_NUMBER_ERROR
-            })
+            isValidated = true;
+            studentNumberError = DUPLICATE_STUDENT_NUMBER_ERROR;
+            break;
           }
         }
-        if (this.state.error === ""){
-          studentDAO.addObject(firstName, lastName, studentNumber, personlEmail);
+        if (isValidated = false){
+          studentDAO.addObject(firstName, lastName, studentNumber, personlEmail, dateOfBirth, immigrationStatus, address);
 
           alert("Saved!")
           this.props.history.push("/student-list");
         }
+        else{
+          this.setState({
+            isValidated: isValidated,
+            studentNumberError: studentNumberError,
+        });
     }
+  }
 
     render() {
-        const { firstName, lastName, studentNumber, personlEmail } = this.state;
-        const { onFirstNameChange, onLastNameChange, onStudentNumberChange, onPersonlEmailChange, onClick } = this;
+        const { firstName, lastName, studentNumber, personlEmail, dateOfBirth, immigrationStatus, address, isValidated, studentNumberError } = this.state;
+        const { onFirstNameChange, onLastNameChange, onStudentNumberChange, onPersonlEmailChange, onClick, onDateOfBirthChange, onImmigrationStatusChange, onAddressChange } = this;
         return (
             <StudentCreateComponent
                 firstName={firstName}
                 lastName={lastName}
                 studentNumber={studentNumber}
                 personlEmail={personlEmail}
+                dateOfBirth = {dateOfBirth}
+                immigrationStatus = {immigrationStatus}
+                address = {address}
+                isValidated ={isValidated}
+                studentNumberError = {studentNumberError}
                 onFirstNameChange={onFirstNameChange}
                 onLastNameChange={onLastNameChange}
                 onStudentNumberChange={onStudentNumberChange}
                 onPersonlEmailChange={onPersonlEmailChange}
+                onDateOfBirthChange = {onDateOfBirthChange}
+                onImmigrationStatusChange = {onImmigrationStatusChange}
+                onAddressChange = {onAddressChange}
                 onClick={onClick}
             />
         );

@@ -14,6 +14,7 @@ export default class LoginContainer extends Component {
         this.onEmailChange = this.onEmailChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.onBackClick = this.onBackClick.bind(this);
     }
 
     onEmailChange(event) {
@@ -26,6 +27,11 @@ export default class LoginContainer extends Component {
         this.setState({
             password: event.target.value,
         })
+    }
+
+    onBackClick(event){
+      event.preventDefault();
+      this.props.history.push("/");
     }
 
     onClick(event) {
@@ -44,7 +50,7 @@ export default class LoginContainer extends Component {
 
     render() {
         const { email, password } = this.state;
-        const { onEmailChange, onPasswordChange, onClick } = this;
+        const { onEmailChange, onPasswordChange, onClick, onBackClick } = this;
         return (
             <LoginComponent
                 email={email}
@@ -52,6 +58,7 @@ export default class LoginContainer extends Component {
                 onEmailChange={onEmailChange}
                 onPasswordChange={onPasswordChange}
                 onClick={onClick}
+                onBackClick = {onBackClick}
             />
         );
     }

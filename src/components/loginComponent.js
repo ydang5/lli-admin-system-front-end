@@ -14,7 +14,7 @@ export default function LoginComponent(props){
 
   const {
     email, password,
-    onEmailChange, onPasswordChange, onClick
+    onEmailChange, onPasswordChange, onClick, onBackClick
   } = props
 
   return(
@@ -49,7 +49,9 @@ export default function LoginComponent(props){
         <Button variant="primary" type="submit" onClick={(event)=>onClick(event) }>
           Submit
         </Button>{' '}
-        <Link to="/">Back</Link>
+        <Button variant="primary" type="submit" onClick={(event)=>onBackClick(event) }>
+        Back
+        </Button>
       </Form>
     </Container>
   )
