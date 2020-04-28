@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container';
 import Image from "react-bootstrap/Image"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
+import Col from "react-bootstrap/Col"
+import Row from "react-bootstrap/Row"
 
 const MISMATCH_PASSWORD_ERROR="passwordDoNotMatch"
 const DUPLICATE_EMAIL_ERROR = "emailExsited"
@@ -20,6 +22,10 @@ export default function RegisterComponent(props){
 
   return(
     <Container>
+    <Row>
+      <Col>
+      </Col>
+      <Col>
       <Image
       src="https://www.llinstitute.com/wp-content/uploads/2018/03/logo-footer.png"
       width = {75}
@@ -152,6 +158,10 @@ export default function RegisterComponent(props){
         Back
         </Button>
       </Form>
+      </Col>
+      <Col>
+      </Col>
+    </Row>
     </Container>
   );
 }

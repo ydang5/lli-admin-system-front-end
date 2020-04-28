@@ -13,6 +13,7 @@ import StudentDetailContainer from "./studentDetailContainer";
 import StudentArchiveContainer from "./studentArchiveContainer";
 import StudentDeleteContainer from "./studentDeleteContainer";
 import StudentUpdateContainer from "./studentUpdateContainer";
+import PolicyContainer from "./policyContainer";
 
 
 import { BrowserRouter as Router, Route, withRouter, Switch} from "react-router-dom";
@@ -38,6 +39,7 @@ class AppContainer extends Component {
                 <Route path="/student-archive/:studentNumber" exact component={StudentArchiveContainer} />
                 <Route path="/student-delete/:studentNumber" exact component={StudentDeleteContainer} />
                 <Route path="/student-update/:studentNumber" exact component={StudentUpdateContainer} />
+                <Route path="/policy" exact component={PolicyContainer} />
                 <Route component={NotFound404Container} />
            </Switch>
          </div>

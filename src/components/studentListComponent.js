@@ -69,7 +69,7 @@ export default function StudentListComponent(props) {
 // TODO: filter
 // TODO: add row and col
     return (
-      <Container fluid
+      <Container
       >
 
               <Image
@@ -78,7 +78,10 @@ export default function StudentListComponent(props) {
               height = {85}
               rounded
               />
-              <h2>Student List</h2>
+              <h3><strong>Student List</strong></h3>
+              <Button variant="outline-primary"><Link to="policy">Policy and Procedure</Link></Button>
+              <br />
+              <br />
               <Button variant="outline-primary"><Link to="student-create">Create a Student</Link></Button>
               <br /><br />
               <input

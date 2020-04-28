@@ -15,7 +15,7 @@ export default function IndexComponent(props){
           <Col>
           </Col>
           <Col md="auto">
-            <h2>London Language Institute Admin Portal</h2>
+            <h1>London Language Institute Admin Portal</h1>
           </Col>
           <Col>
           </Col>
